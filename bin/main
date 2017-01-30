@@ -1,0 +1,13 @@
+#!/usr/bin/perl
+
+use utf8;
+use strict;
+use warnings;
+use lib "/home/Vyacheslav/chatServer/lib";
+use Turtle::Server;
+binmode STDOUT, ":utf8";
+binmode STDERR, ":utf8";
+
+my $server = Turtle::Server->new;
+
+$server->start;

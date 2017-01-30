@@ -1,0 +1,6 @@
+{
+  "hostAdress"     : "localhost",
+  "hostService"    : 12345,
+  "listenQueueNum" : 5,
+  "maxConnections" : 2
+}
