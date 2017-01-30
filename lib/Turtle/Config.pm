@@ -17,7 +17,7 @@ sub getConfig {
   if ($config->{initialized}) {
     return $config;
   }
-  open (my $fh, "<", "/home/Vyacheslav/chatServer/config.json") or die $!;
+  open (my $fh, "<", "/home/Vyacheslav/TurtleServer/config.json") or die $!;
   my $jsonxs = JSON::XS->new->utf8->relaxed;
   my $input;
   while (my $str = <$fh>) {

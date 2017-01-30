@@ -1,9 +1,16 @@
 #!/usr/bin/perl
-
 use utf8;
 use strict;
 use warnings;
-use lib "/home/Vyacheslav/chatServer/lib";
+
+BEGIN {
+  my $path = __FILE__;
+  $path =~ s{/[^/]+$}{};
+  chdir($path);
+}
+
+
+use TurtleLib;
 use Turtle::Server;
 binmode STDOUT, ":utf8";
 binmode STDERR, ":utf8";

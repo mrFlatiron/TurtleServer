@@ -1,6 +1,5 @@
 package Turtle::Const::Server;
 
-use lib "/home/Vyacheslav/chatServer/lib";
 use Turtle::Const;
 
 sub USERNAME_TAKEN           { -100 }

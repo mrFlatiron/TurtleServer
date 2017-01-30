@@ -2,7 +2,6 @@ package Turtle::User;
 use utf8;
 use strict;
 use warnings;
-use lib "/home/Vyacheslav/chatServer/lib";
 use Data::Dumper;
 use IO::Socket;
 use AnyEvent;

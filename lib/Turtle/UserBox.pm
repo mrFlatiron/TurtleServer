@@ -2,7 +2,6 @@ package Turtle::UserBox;
 use utf8;
 use strict;
 use warnings;
-use lib "/home/Vyacheslav/chatServer/lib";
 use Turtle::User;
 use Turtle::Config;
 use Turtle::Const::Server;

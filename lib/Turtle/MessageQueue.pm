@@ -2,7 +2,6 @@ package Turtle::MessageQueue;
 use utf8;
 use strict;
 use warnings;
-use lib "/home/Vyacheslav/chatServer/lib";
 use IO::Socket;
 use Turtle::UserBox;
 use Data::Dumper;
