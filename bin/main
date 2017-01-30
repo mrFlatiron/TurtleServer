@@ -2,12 +2,14 @@
 use utf8;
 use strict;
 use warnings;
+use Data::Dumper;
+
 
 BEGIN {
   my $path = __FILE__;
   $path =~ s{/[^/]+$}{};
-  chdir($path);
-  use lib $path . "/../lib";
+  $path .= "/../lib";
+  push @INC, $path;
 }
 
 

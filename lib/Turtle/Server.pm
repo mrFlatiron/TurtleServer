@@ -11,11 +11,14 @@ use Turtle::Const::Server;
 
 sub new {
   my $config = Turtle::Config->new->getConfig;
+  my $self = {};
+  for my $k (keys %$config) {
+    $self->{$k} = $config->{$k};
+  }
+  $self->{userBox} = Turtle::UserBox->new;
+  $self->{cv}      = AnyEvent->condvar;
 
-  $config->{userBox} = Turtle::UserBox->new;
-  $config->{cv}      = AnyEvent->condvar;
-
-  bless $config, shift;
+  bless $self, shift;
 }
 
 sub start {
