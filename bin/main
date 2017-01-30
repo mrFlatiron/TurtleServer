@@ -7,10 +7,10 @@ BEGIN {
   my $path = __FILE__;
   $path =~ s{/[^/]+$}{};
   chdir($path);
+  use lib $path . "/../lib";
 }
 
 
-use TurtleLib;
 use Turtle::Server;
 binmode STDOUT, ":utf8";
 binmode STDERR, ":utf8";
