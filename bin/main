@@ -4,7 +4,6 @@ use strict;
 use warnings;
 use Data::Dumper;
 
-
 BEGIN {
   my $path = __FILE__;
   $path =~ s{/[^/]+$}{};
@@ -12,10 +11,10 @@ BEGIN {
   push @INC, $path;
 }
 
-
 use Turtle::Server;
 binmode STDOUT, ":utf8";
 binmode STDERR, ":utf8";
+binmode STDIN, ":utf8";
 
 my $server = Turtle::Server->new;
 

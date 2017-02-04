@@ -76,7 +76,6 @@ sub adminAction {
 sub kickCommand {
   my ($self, $command) = @_;
   my ($user_name) = $command =~ /^\s*kick\s+name=(.*)$/;
-  $user_name = Encode::decode_utf8($user_name);
   unless ($user_name) {
     return 0;
   }
