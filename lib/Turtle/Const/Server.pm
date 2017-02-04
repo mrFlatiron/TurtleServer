@@ -5,6 +5,7 @@ use Turtle::Const;
 sub USERNAME_TAKEN           { -100 }
 sub SERVER_FULL              { -101 }
 sub USERNAME_TOO_LONG        { -102 }
+sub BY_ADMIN                 { -103 }
 
 
 sub errorToText {
@@ -18,6 +19,9 @@ sub errorToText {
   }
   if ($error == USERNAME_TOO_LONG()) {
     return "The username's length must be no more than " . Turtle::Const::MAX_USERNAME_LENGTH_UTF8() . " characters";
+  }
+  if ($error == BY_ADMIN()) {
+    return "Kicked by Admin. Looser.";
   }
 
   return '';

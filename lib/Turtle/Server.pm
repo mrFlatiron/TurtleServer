@@ -68,6 +68,19 @@ sub adminAction {
     $self->{userBox}->closeAll;
     warn "Gracefully shutting down. Goodbye!";
   }
+  if ($command =~ /^\s*kick/) {
+    $self->kickCommand($command);
+  }
+}
+
+sub kickCommand {
+  my ($self, $command) = @_;
+  my ($user_name) = $command =~ /^\s*kick\s+name=(.*)$/;
+  $user_name = Encode::decode_utf8($user_name);
+  unless ($user_name) {
+    return 0;
+  }
+  $self->{userBox}->getByName($user_name)->kick(Turtle::Const::Server::BY_ADMIN());
 }
 
 sub acceptConnection {

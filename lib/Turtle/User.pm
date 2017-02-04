@@ -59,7 +59,7 @@ sub msgRecv {
       return 0;
     }
     if ($msg_length <= 0) {
-      $self->closeConnection("Message length invalid");
+      $self->closeConnection("Message length invalid (<0)");
       return 0;
     }
 
@@ -107,7 +107,7 @@ sub closeConnection {
   warn "[" . $self->{socket}->peerhost . " <-> '" . $self->{name} . "']: " . $log . "\n" if $log;
   close $self->{socket} if $self->{socket}->connected();
   undef $self->{watcher} if $self->{watcher};
-  Turtle::UserBox->delete($self->{ID}) if $self->{ID};
+  Turtle::UserBox->getInstance->delete($self->{ID}) if $self->{ID};
 }
 
 sub setBufEmpty {
@@ -125,7 +125,7 @@ sub setName {
       return 0;
     }
 
-  if (Turtle::UserBox->nameCheck($name)) {
+  if (Turtle::UserBox->getInstance->nameCheck($name)) {
     $self->{name} = $name;
     $self->setBufEmpty;
     warn "[" . $self->{socket}->peerhost . "]: Set username to '" . $self->{name} . "'\n";

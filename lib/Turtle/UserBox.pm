@@ -2,6 +2,7 @@ package Turtle::UserBox;
 use utf8;
 use strict;
 use warnings;
+use Data::Dumper;
 use Turtle::User;
 use Turtle::Config;
 use Turtle::Const::Server;
@@ -21,40 +22,55 @@ sub getInstance {
 
 sub add {
   my ($self, $user) = @_;
-  if ($instance->{count} + 1 > Turtle::Config->getConfig->{maxConnections}) {
+  if ($self->{count} + 1 > Turtle::Config->getConfig->{maxConnections}) {
     return Turtle::Const::Server::SERVER_FULL();
   }
-  $instance->{maxID}++;
-  my $id = $instance->{maxID};
-  $instance->{users}->{$id} = $user;
+  $self->{maxID}++;
+  my $id = $self->{maxID};
+  $self->{users}->{$id} = $user;
   $user->{ID} = $id; 
-  $instance->{count}++;
+  $self->{count}++;
   return 0;
 }
 
 sub delete {
   my ($self, $userID) = @_;
-  if (exists $instance->{users}->{$userID}) {
-    delete $instance->{users}->{$userID};
-    $instance->{count}--;
+  if (exists $self->{users}->{$userID}) {
+    delete $self->{users}->{$userID};
+    $self->{count}--;
   }
-  return $instance;
+  return $self;
 }
 
 sub closeAll {
   my ($self) = @_;
-  for my $userID (keys %{$instance->{users}}) {
-    my $user = $instance->{users}->{$userID};
+  for my $userID (keys %{$self->{users}}) {
+    my $user = $self->{users}->{$userID};
     $user->closeConnection;
   }
-  $instance->{maxID} = 0;
-  return $instance;
+  $self->{maxID} = 0;
+  return $self;
 }
 
 sub nameCheck {
   my ($self, $name) = @_;
-  return 1 if $instance->{count} == 0;
-  return (!grep {$instance->{users}->{$_}->{name} eq $name} keys %{$instance->{users}});
+  return 1 if $self->{count} == 1;
+  return 1 unless $self->getByName($name);
+  return 0;
+}
+
+sub getByID {
+  my ($self, $ID) = @_;
+  my $user = $self->{users}->{$ID};
+  return $user;
+}
+
+sub getByName {
+  my ($self, $name) = @_;
+  my $user;
+  my ($userID) = grep {($user = $self->getByID($_)) and $user->{name} eq $name} keys %{$self->{users}};
+  my $user = $self->getByID($userID) if $userID;
+  return $user;
 }
 
 1;
