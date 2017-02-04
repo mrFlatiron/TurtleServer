@@ -80,7 +80,13 @@ sub kickCommand {
   unless ($user_name) {
     return 0;
   }
+  my $user = $self->{userBox}->getByName($user_name);
+  unless ($user) {
+    print STDERR "[ERROR]: kick: no user found\n";
+    return 0;
+  }
   $self->{userBox}->getByName($user_name)->kick(Turtle::Const::Server::BY_ADMIN());
+  return 1;
 }
 
 sub acceptConnection {
